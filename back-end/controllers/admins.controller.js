@@ -10,4 +10,19 @@ let insertAdmin = (req,res)=>{
     })
 }
 
+
+
+// var add = function (req, res){
+//     let {name,password,email}=req.body
+//     User.insertMany({name, password,email})
+//     .then((user) => {
+//       res.status(200).send(user);
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error);
+//     });
+// }
+
+
+
 module.exports = { insertAdmin }
