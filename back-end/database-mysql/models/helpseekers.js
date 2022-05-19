@@ -13,6 +13,13 @@ module.exports = {
           callback(err, result);
         });
       },
+
+      getRole: (email, callback) => {
+        const sql = "SELECT role FROM contributors WHERE email =?";
+        connection.query(sql, [email], (err, result) => {
+          callback(err, result);
+        });
+      },
       getAllLastName: function (last_name, callback) {
         const sql = "SELECT * FROM  Contributors WHERE last_name = ? ";
         connection.query(sql, [last_name], (err, result) => {

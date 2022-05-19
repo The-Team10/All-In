@@ -39,14 +39,13 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `all-in1`.`Contributors` (
   `contributor_id` INT NOT NULL AUTO_INCREMENT,
-  `first name` VARCHAR(45) NOT NULL,
-  `last name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(120) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) ,
   PRIMARY KEY (`contributor_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -59,7 +58,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `all-in1`.`donations` (
   `donation_id` INT NOT NULL AUTO_INCREMENT,
-  `Donation name` VARCHAR(255) NULL,
+  `Donation_name` VARCHAR(255) NULL,
   `type` VARCHAR(45) NULL,
   `status` VARCHAR(255) NOT NULL,
   `image_url` VARCHAR(255) NOT NULL,
@@ -109,7 +108,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `all-in1`.`Needs` (
   `need_id` INT NOT NULL AUTO_INCREMENT,
-  `donation name` VARCHAR(255) NOT NULL,
+  `need_name` VARCHAR(255) NOT NULL,
   `status` VARCHAR(255) NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
