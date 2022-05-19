@@ -45,8 +45,7 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`Contributors` (
   `password` VARCHAR(120) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) ,
   PRIMARY KEY (`contributor_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
