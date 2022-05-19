@@ -1,4 +1,4 @@
-const helpseekers = require('../database-mysql/models/helpseekers')
+const helpseekers = require('../database-mysql/models/contributors')
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
