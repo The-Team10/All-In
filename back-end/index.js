@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 //Add Routes to the middleware handling path, specifying the respective URL path
+
 app.use('/api/admins',adminsRoutes)
 app.use('/api/contributors',contributorsRoutes)
 app.use('/api/helpseekers',helpseekersRoutes)

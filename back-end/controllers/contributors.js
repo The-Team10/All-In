@@ -5,11 +5,24 @@ const bcrypt = require("bcrypt");
 module.exports = {
   signupHelp: async function (req, res) {
     const {
-      first_name, last_name,email,password,confirmPassword,role,status,
+      first_name,
+      last_name,
+      email,
+      password,
+      confirmPassword,
+      role,
+      status,
     } = req.body;
     console.log(req.body);
     const created_at = new Date();
-    if (!email ||!password ||!first_name ||!last_name ||!confirmPassword ||!role) {
+    if (
+      !email ||
+      !password ||
+      !first_name ||
+      !last_name ||
+      !confirmPassword ||
+      !role
+    ) {
       res.send("please fill all required fields");
     } else {
       if (confirmPassword !== password) {
@@ -36,12 +49,15 @@ module.exports = {
                   } else {
                     try {
                       const salt = await bcrypt.genSalt();
-                      const hashedPassword = await bcrypt.hash(
-                        password,
-                        salt
-                      );
+                      const hashedPassword = await bcrypt.hash(password, salt);
                       contributors.signup(
-                        first_name, last_name,email,hashedPassword,role,status,created_at,
+                        first_name,
+                        last_name,
+                        email,
+                        hashedPassword,
+                        role,
+                        status,
+                        created_at,
                         async (err) => {
                           if (err) {
                             res.send(err);
@@ -74,7 +90,7 @@ module.exports = {
         if (err) {
           return res.status(200).send(err);
         }
-        if (result.length  === 0) {
+        if (result.length === 0) {
           return res.send("email not found");
         } else {
           try {
@@ -95,12 +111,11 @@ module.exports = {
                     }
                     if (result[0].role === "help seekers") {
                       return res.send(" hi help seekers");
-
-                    }if (result[0].role ==  'help giver') {
+                    }
+                    if (result[0].role == "help giver") {
                       return res.send("hi hel giver  hg");
-
-                    }else{
-                        res.send('login successful')
+                    } else {
+                      res.send("login successful");
                     }
                   });
                 }
