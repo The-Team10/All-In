@@ -1,9 +1,9 @@
 const connection = require("../index")
 module.exports = {
-    signup: function (first_name, last_name,email, password,role, callback) {
+    signup: function (first_name, last_name,email, password,role,status, callback) {
         const sql =
-          "INSERT INTO Contributors (first_name, last_name,email,password,role) VALUES (?,?,?,?,?)";
-        connection.query(sql, [first_name,last_name, email, password,role], (err, result) => {
+          "INSERT INTO Contributors (first_name, last_name,email,password,role,status) VALUES (?,?,?,?,?,?)";
+        connection.query(sql, [first_name,last_name,  email,password,role,status], (err, result) => {
           callback(err, result);
         });
       },
