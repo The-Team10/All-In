@@ -39,15 +39,13 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `all-in1`.`contributors` (
   `contributor_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(100) NOT NULL,
+  `last_name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(120) NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  `status` VARCHAR(45) NOT NULL,
-  `phone` VARCHAR(45) NULL,
-  `adresse` VARCHAR(255) NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `role` VARCHAR(100) NOT NULL,
+  `created_at` VARCHAR(100) NOT NULL,
+  `status` VARCHAR(100) ,
   PRIMARY KEY (`contributor_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4

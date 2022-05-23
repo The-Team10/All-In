@@ -1,17 +1,18 @@
-const db = require("../database-mysql");
-const admins = require("../database-mysql/models/admins");
+const Admins = require("../database-mysql/models/Admins");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-var cloudinar = require("cloudinary").v2;
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-
-//////////
 
 module.exports = {
   signupAdmins: async function (req, res) {
-    const { email, password, confirmPassword, first_name, last_name, role } =
-      req.body;
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      confirmPassword,
+      role
+      } = req.body;
+    console.log(req.body);
     const created_at = new Date();
     if (
       !email ||
@@ -21,70 +22,74 @@ module.exports = {
       !confirmPassword ||
       !role
     ) {
-      res.send("please fill all required fields");
-    } else if (confirmPassword !== password) {
-      res.send("please confirm your password");
+      res.send("Welcome On Board");
     } else {
-      admins.getAllFirstNames(first_name, async (err, result) => {
-        if (err) {
-          res.send(err);
-        } else if (result.length > 0) {
-          res.send("this name exist");
-        } else {
-          admins.getAllLastNames(last_name, async (err, result) => {
-            console.log(result);
-            if (err) {
-              res.send(err);
-            } else if (result.length > 0) {
-              res.send("this last name exist");
-            } else {
-              admins.getAllEmails(emails, async (err, result) => {
-                if (err) {
-                  res.send(err);
-                }
-                if (result.length) {
-                  res.send("this email exist");
-                } else {
-                  try {
-                    const salt = await bcrypt.genSalt();
-                    const hashedPassword = await bcrypt.hash(password, salt);
-                    admins.signup(
-                      first_name,
-                      last_name,
-                      email,
-                      hashedPassword,
-                      role,
-                      async (err) => {
-                        if (err) {
-                          res.send(err);
-                        } else {
-                          res.send("signup successful");
+      if (confirmPassword !== password) {
+        res.send("please confirm your password");
+      } else {
+        Admins.getAllFirstName(first_name, async (err, result) => {
+          console.log(result);
+          if (err) {
+            res.send(err);
+          } else if (result.length > 0) {
+            res.send("this name exist");
+          } else {
+            Admins.getAllLastName(last_name, async (err, result) => {
+              if (err) {
+                res.send(err);
+              } else if (result.length > 0) {
+                res.send("this last name exist");
+              } else {
+                Admins.getAllEmails(email, async (err, result) => {
+                  if (err) {
+                    res.send(err);
+                  } else if (result.length > 0) {
+                    res.send("this email exixt");
+                  } else {
+                    try {
+                      const salt = await bcrypt.genSalt();
+                      const hashedPassword = await bcrypt.hash(password, salt);
+                      Admins.signup(
+                        first_name,
+                        last_name,
+                        email,
+                        hashedPassword,
+                        role,
+                        created_at,
+                        async (err) => {
+                          if (err) {
+                            res.send(err);
+                          } else {
+                            res.send("signup successful");
+                            return;
+                          }
                         }
-                      }
-                    );
-                  } catch {
-                    res.status(500);
+                      );
+                    } catch {
+                      res.status(500);
+                    }
                   }
-                }
-              });
-            }
-          });
-        }
-      });
+                });
+              }
+            });
+          }
+        });
+      }
     }
   },
 
   loginAdmins: function (req, res) {
     const { email, password } = req.body;
+    console.log(req.body);
     if (!email || !password) {
-      return res.send({ message: "Please fill all the fields" });
+      return res.send("Please fill all the fields");
     } else {
-      admins.getAllEmails(emails, (err, result) => {
+      Admins.getAllEmails(email, (err, result) => {
         if (err) {
           return res.status(200).send(err);
         }
-        if (result.length == 0) {
-          return res.status(200).send({ message: "email not found" });
+        if (result.length === 0) {
+          return res.send("email not found");
         } else {
           try {
             bcrypt.compare(
@@ -98,41 +103,17 @@ module.exports = {
                   res.send({ message: "login failed" });
                 }
                 if (result === true) {
-                  admins.getRole(email, (err, result) => {
+                  Admins.getRole(email, (err, result) => {
                     if (err) {
                       return res.send(err);
                     }
-                    if (result[0].role === "admins") {
-                      return res.send({ message: " welome on boards" });
-                      // redierct to help seekers path
+                    if (result[0].role === "Admins") {
+                      return res.send(" hi Admins");
                     }
-                    if (result[0].role === "staff member") {
-                      return res.send("logged in successfully");
-                      // redierct to help giver path
-
-                      admins.getall(email, (err, result) => {
-                        if (err) {
-                          return res.send(err);
-                        } else {
-                          const user = {
-                            id: result[0].id,
-                            name: result[0].first_name,
-                            email: result[0].email,
-                          };
-                          jwt.sign(
-                            { user },
-                            process.env.JWT_SECRET_KEY,
-                            (err, token) => {
-                              if (err) {
-                                return res.send(err);
-                              }
-                              res.send(token);
-                            }
-                          );
-                        }
-                      });
+                    if (result[0].role == "Staff Member") {
+                      return res.send("hi Staff Member");
                     } else {
-                      res.send("hello");
+                      res.send("login successful");
                     }
                   });
                 }
@@ -145,59 +126,4 @@ module.exports = {
       });
     }
   },
-  //  signupAdmin: async function (req, res) {
-  //     const { email, password, confirmPassword, username, role } = req.body;
-  //     if (!email || !password || !confirmPassword || !username || !role) {
-  //       res.status(500).send("fill all the field");
-  //     } else {
-  //       if (confirmPassword != password) {
-  //         return res.status(500).send("confirm your password");
-  //       }
-  //       admins.getAllNames(username, async (err, result) => {
-  //         if (err) {
-  //           res.status(500).send(err);
-  //         } else if (result.length > 0) {
-  //           return res.status(400).send("username already exist");
-  //         } else {
-  //           admins.getAllEmails(email, async (err, result) => {
-  //             if (err) {
-  //               res.status(500).send(err);
-  //             } else if (result.length > 0) {
-  //               return res.status(400).send("email already exist");
-  //             } else {
-  //               const salt = await bcrypt.genSalt();
-  //               const hashedPassword = await bcrypt.hash(password, salt);
-  //               admins.signupAdmin(
-  //                 username,
-  //                 email,
-  //                 hashedPassword,
-  //                 role,
-  //                 (err, result) => {
-  //                   if (err) res.status(500).send(err);
-  //                   else {
-  //                     res.status(200).send("signup successfully ");
-  //                   }
-  //                 }
-  //               );
-  //             }
-  //           });
-  //         }
-  //       });
-  //     }
-  //   },
-  //   getAdminByRole: function (req, res) {
-  //     const email = req.body.email;
-  //     admins.getAdminByRole(email, (err, result) => {
-  //       if (err) {
-  //         res.status(500).send(err);
-  //       }
-  //       if (!result.length) {
-  //         res.send("not found");
-  //       } else if (result[0].role === null) {
-  //         res.send("user");
-  //       } else {
-  //         res.send(result[0].role);
-  //       }
-  //     });
-  //   },
 };
