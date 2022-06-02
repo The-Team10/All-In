@@ -5,7 +5,7 @@ module.exports = {
     callback
   ) {
     const sql =
-      "INSERT INTO Contributors (first_name, last_name,email,password,role,photo,anonyme,created_at) VALUES (?,?,?,?,?,?,?,?)";
+      "INSERT INTO contributors (first_name, last_name,email,password,role,photo,anonyme,created_at) VALUES (?,?,?,?,?,?,?,?)";
     connection.query(
       sql,
       [first_name, last_name,email,password,role,photo,anonyme,created_at],

@@ -46,8 +46,12 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`contributors` (
   `role` VARCHAR(100) NOT NULL,
   `photo` VARCHAR(200),
   `anonyme`BOOLEAN,
-  `created_at` VARCHAR(100) NOT NULL
-);
+  `created_at` VARCHAR(100) NOT NULL,
+   PRIMARY KEY (`contributor_id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table `all-in1`.`events`
@@ -244,6 +248,4 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

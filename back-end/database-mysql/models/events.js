@@ -6,10 +6,10 @@ module.exports = {
     //     const sql="SELECT * FROM Events where id=?";
     //     conn.query(sql, id,function (err,result){
     //         callback(err,result)
-    //     });
+    //     });  
     //   }, 
     //   selectManyById: function ( id, callback) {
-    //     const sql = "SELECT * FROM Events t1 INNER JOIN users t2 ON t1.user_id = t2.id and t2.id =?";
+    //     const sql = "SELECT * FROM Events WHERE id =?";
     //     conn.query(sql, [id], function (error, results) {
     //         callback(error, results);
     //     });
@@ -22,14 +22,14 @@ module.exports = {
     //     });
     //   },
 
-    // add: function (event, callback) {
-    //     const sql = "INSERT INTO Events SET ?";
-    //     conn.query(sql, event, function (error, results) {
-    //         callback(error, results);
-    //     });
-    // },
-    // modifOne: function (event, id, callback) {
-    //     const sql = "UPDATE events SET ? WHERE id=?";
+    add: function (eventName,category,description,date,socialMedia,amount, callback) {
+        const sql = "INSERT INTO Events WHERE id = ?";
+        conn.query(sql, eventName,category,description,date,socialMedia,amount, function (error, results) {
+            callback(error, results);
+        });
+    },
+    // modifyOne: function (event, id, callback) {
+    //     const sql = "UPDATE events WHERE id=?";
     //     conn.query(sql, [event, id], function (error, results) {
     //         callback(error, results);
     //     });
