@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 // Require controller modules.
-const adminsController = require('../controllers/admins.controller')
+const{admins}= require("../controllers/admins.controller");
 
-// POST request
-router.post('/',adminsController.insertAdmin)
-
+//Routers//
+router.post("/admins", admins);
 
 module.exports = router;
+
+
+
+

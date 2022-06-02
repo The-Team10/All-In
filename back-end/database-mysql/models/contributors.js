@@ -1,21 +1,14 @@
 const connection = require("../index");
 module.exports = {
   signup: function (
-    first_name,
-    last_name,
-    email,
-    password,
-    role,
-    created_at,
-
-    status,
+    first_name, last_name,email,password,role,photo,anonyme,created_at,
     callback
   ) {
     const sql =
-      "INSERT INTO Contributors (first_name, last_name,email,password,role,created_at,status) VALUES (?,?,?,?,?,?,?)";
+      "INSERT INTO contributors (first_name, last_name,email,password,role,photo,anonyme,created_at) VALUES (?,?,?,?,?,?,?,?)";
     connection.query(
       sql,
-      [first_name, last_name, email, password, role, created_at, status],
+      [first_name, last_name,email,password,role,photo,anonyme,created_at],
       (err, result) => {
         callback(err, result);
       }
@@ -46,17 +39,29 @@ module.exports = {
       callback(err, result);
     });
   },
-  signupWithoutimg: (username, email, password, callback) => {
-    const sql =
-      "INSERT INTO Contributors (first_name,last_name,email,password,role) VALUES (?,?,?,?,?)";
-    connection.query(sql, [username, email, password], (err, result) => {
-      callback(err, result);
-    });
-  },
+
   getPasswordByEmail: (email, callback) => {
     const sql = "SELECT password FROM Contributors WHERE email = ?;";
     connection.query(sql, [email], (err, result) => {
       callback(err, result);
     });
   },
+  updateContributor: (
+    first_name,
+    last_name,
+    email,
+    contributor_id,
+    callback
+  ) => {
+    const sql =
+      " UPDATE Contributors SET first_name=? , last_name=?, email=? WHERE contributor_id = ?;";
+    connection.query(
+      sql,
+      [first_name, last_name,email ,contributor_id],
+      (err, result) => {
+        callback(err, result);
+      }
+    );
+  },
 };
+

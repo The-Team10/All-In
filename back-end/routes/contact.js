@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const{ helpseekers}= require("../controllers/helpseekers")
+const{ contact}= require("../controllers/contact")
 
-router.post("/needs",helpseekers);
+router.post("/contact",contact);
 
 
 module.exports = router;
