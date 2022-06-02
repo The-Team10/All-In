@@ -19,6 +19,7 @@ module.exports = {
       }
     );
   },
+  
   getAllFirstName: function (first_name, callback) {
     const sql = "SELECT * FROM  Admins WHERE first_name = ? ";
     connection.query(sql, [first_name], (err, result) => {

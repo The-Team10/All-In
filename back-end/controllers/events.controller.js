@@ -1,5 +1,5 @@
-// var db = require("../database-mysql");
-// const { getOne, select, add, modifyOne, deleteOne } = require("../database-mysql/eventModel.js");
+ var db = require("../database-mysql");
+ const { getOne, select, add, modifyOne, deleteOne } = require("../database-mysql/models/events");
 
 
 
@@ -36,18 +36,18 @@ module.exports = {
 //   }
 // })
 // },
-//   addEvent: function (req, res) {
-//     add(req.body, (err, results) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         }
-//         else {
-//             res.status(201).json(results);
-//         }
-//     })
-// },
+  addEvent: function (req, res) {
+    add(req.body, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(201).json(results);
+        }
+    })
+},
 // modifyEvent: function (req, res) {
-//     modifOne(req.body, req.params.id, (err, results) => {
+//     modifyOne(req.body, req.params.id, (err, results) => {
 //         console.log(req.params.id)
 //         if (err) {
 //             res.status(500).send(err);
