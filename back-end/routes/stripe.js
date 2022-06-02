@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
+const {  payFinancial ,verify} = require("../controllers/stripe");
 
-const{ helpseekers}= require("../controllers/helpseekers")
-
-router.post("/needs",helpseekers);
-
+router.post("/payFinancial",  payFinancial);
 
 module.exports = router;
