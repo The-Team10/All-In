@@ -5,8 +5,8 @@ require("dotenv").config();
 const{signupHelp ,loginHelp,decodeToken,updateContributor}= require("../controllers/contributors")
 // router.get("/gethelp", getReviews);
 //Routers//
-router.post("/signup",signupHelp);
-router.post("/login",loginHelp);
-router.get('/',decodeToken)
-router.put('/update/:id',updateContributor)
+router.post("",signupHelp);
+// router.post("/login",loginHelp);
+// router.get('/',decodeToken)
+// router.put('/update/:id',updateContributor)
 module.exports = router;

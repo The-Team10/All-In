@@ -20,10 +20,10 @@ const port = 3000;
 
 //Middleware to parse incoming requests with JSON and urlencoded payloads
 
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
-app.use(cors({ origin: "*" }));
 
 //Add Routes to the middleware handling path, specifying the respective URL path
 
