@@ -1,7 +1,9 @@
 const contributors = require("../database-mysql/models/contributors");
 require("dotenv").config();
-const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
+
+const bcrypt = require("bcrypt");
 module.exports = {
   signupHelp: async function (req, res) {
     const {
@@ -13,7 +15,7 @@ module.exports = {
       role,
       status,
     } = req.body;
-    console.log(req.body);
+    console.log(req.body)
     const created_at = new Date();
     if (
       !email ||
@@ -79,10 +81,8 @@ module.exports = {
       }
     }
   },
-
-  loginHelp: function (req, res) {
+  loginHelp:async function (req, res) {
     const { email, password } = req.body;
-    console.log(req.body);
     if (!email || !password) {
       return res.send("Please fill all the fields");
     } else {
@@ -102,7 +102,7 @@ module.exports = {
                   res.send(err);
                 }
                 if (result === false) {
-                  res.send({ message: "login failed" });
+                  res.send("login failed");
                 }
                 if (result === true) {
                   contributors.getRole(email, (err, result) => {
@@ -128,4 +128,43 @@ module.exports = {
       });
     }
   },
+
+
+
+
+
+
+ decodeToken : (req, res) => {
+   let token = req.headers.token
+   var decoded = jwt.decode(token)
+   jwt.verify(token,process.env.JWT_SECRET_KEY,(err, result)=>{
+     if(err){return res.send(err)}
+     else{
+       const sql = "select * from Contributors WHERE email =?"
+       contributors.getAllEmails(decoded.user.email, (err, result) => {
+if(err){return res.send(err)}
+else{
+res.send(result)
+}
+})
+     }
+   })
+
+},
+
+updateContributor: async function (req, res) {
+  const {first_name, last_name, email}=req.body
+  const {contributor_id}=req.params
+
+contributors.updateContributor(first_name,last_name,email,contributor_id,(err, result)=>{
+  if (err) {res.send(err)}
+  else{
+    res.send('updated successful')
+  }
+})
+
+}
+
+
+
 };
