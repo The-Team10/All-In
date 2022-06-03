@@ -6,7 +6,7 @@ const db = require('../back-end/database-mysql/index')
 const adminsRoutes = require('./routes/admins')
 const contributorsRoutes = require('./routes/contributors')
 const helpseekersRoutes =require('./routes/helpseekers')
-
+const eventsRoutes = require('./routes/events')
 //Create an Express App and define the port
 const app = express();
 const port = 3000;
@@ -24,8 +24,13 @@ app.use(cors({ origin: "*" }));
 app.use('/api/admins',adminsRoutes)
 app.use('/api/contributors',contributorsRoutes)
 app.use('/api/helpseekers',helpseekersRoutes)
-
+app.use('api/events',eventsRoutes)
 //Listening on port 3000 for connections
+
+
+
+/////////////
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
