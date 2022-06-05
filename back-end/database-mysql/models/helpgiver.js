@@ -7,13 +7,13 @@ module.exports = {
     type,
     adress,
     image_url,
-    created_at,
     phone,
     description,
+    created_at,
     callback
   ) {
     const sql =
-      "INSERT INTO donationsMaterial(first_name, last_name, Donation_name,type,adress,image_url, phone, created_at,description ) Values (?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO donationsMaterial(first_name, last_name, Donation_name,type,adress,image_url, phone ,description,created_at ) Values (?,?,?,?,?,?,?,?,?)";
     connection.query(
       sql,
       [
@@ -23,9 +23,9 @@ module.exports = {
         type,
         adress,
         image_url,
-        created_at,
         phone,
         description,
+        created_at,
       ],
       (err, result) => {
         callback(err, result);

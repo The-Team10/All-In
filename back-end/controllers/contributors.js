@@ -101,7 +101,8 @@ module.exports = {
                           const user ={
                             email:results[0].email,               
                             name:results[0].first_name,
-                            photo:results[0].photo
+                            photo:results[0].photo,
+                            role:results[0].role
  
                          }
                            jwt.sign(
@@ -111,7 +112,7 @@ module.exports = {
                              if (err) {
                                return res.send(err);
                              }else{
-                              res.send({token:token,msg:' hi help seekers'});
+                              res.send({token:token,msg:' welcome hs'});
 
                              }
                            }
@@ -127,7 +128,8 @@ module.exports = {
                           const user ={
                             email:results[0].email,               
                             name:results[0].first_name,
-                            photo:results[0].photo
+                            photo:results[0].photo,
+                            role:results[0].role
                          }
 console.log(user)
                          jwt.sign(

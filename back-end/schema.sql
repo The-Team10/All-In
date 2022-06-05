@@ -30,17 +30,18 @@ CREATE TABLE IF NOT EXISTS `Admins` (
 -- -----------------------------------------------------
 -- Table `all-in1`.`Contributors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `all-in1`.`Contributors` (
-  `contributor_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(120) NOT NULL,
-  `role` VARCHAR(100) NOT NULL,
-  `photo` VARCHAR(200),
-  `anonyme`BOOLEAN,
-  `created_at` VARCHAR(100) NOT NULL
-);
+
+ CREATE TABLE IF NOT EXISTS `all-in1`.`Contributors` (  
+   `contributor_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   `first_name` VARCHAR(100) NOT NULL,
+    `last_name` VARCHAR(100) NOT NULL,
+       `email` VARCHAR(100) NOT NULL,
+       `password` VARCHAR(120) NOT NULL,
+       `role` VARCHAR(100) NOT NULL,       
+       `photo` VARCHAR(200),
+       `anonyme`BOOLEAN,
+       `created_at` VARCHAR(100) NOT NULL  
+     );
 
 
 -- -----------------------------------------------------
@@ -54,9 +55,9 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`donationsMaterial` (
   `type` VARCHAR(45)NOT NULL,
   `adress` VARCHAR(255) NOT NULL,
   `image_url` VARCHAR(255),
-  `created_at` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(255) NOT NULL,
-  `description` VARCHAR(255)
+  `description` VARCHAR(255),
+  `created_at` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `all-in1`.`donationsFinancial` (
@@ -76,10 +77,10 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`donationsFinancial` (
 -- Table `all-in1`.`Events`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `all-in1`.`Events` (
-  `event_id` INT(20) NOT NULL,
-  `eventName` VARCHAR(40) NOT NULL,
-  `category` VARCHAR(40) NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
+  `event_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `eventName` VARCHAR(200) NOT NULL,
+  `category` VARCHAR(150) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
   `date`  VARCHAR(255) NOT NULL,
   `amount` INT(255) NOT NULL
 );
@@ -92,9 +93,12 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`postneeds` (
   `first_name` VARCHAR(255)NOT NULL,
   `last_name` VARCHAR(255)NOT NULL,
   `CIN` VARCHAR(255),
- `description` VARCHAR(200),
+ `description` VARCHAR(1000),
   `phone` VARCHAR(200) NOT NULL,
   `adress` VARCHAR(200) NOT NULL,
+  `date` VARCHAR(200) NOT NULL,
+  `region` VARCHAR(200) NOT NULL,
+  `categorie` VARCHAR(200) NOT NULL,
   `created_at` VARCHAR(255) NOT NULL
 );
 
@@ -126,4 +130,23 @@ CREATE TABLE IF NOT EXISTS `all-in1`.`Contact` (
     `phone` VARCHAR(200),
     `adress` VARCHAR(200),
   `description` VARCHAR(200) NOT NULL 
+);
+-- -----------------------------------------------------
+-- Table `all-in1`.`categorie health`
+-- -----------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `all-in1`.`categories` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nameCategorie` VARCHAR(255) NOT NULL
+
+);
+
+ CREATE TABLE IF NOT EXISTS `all-in1`.`education` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nameCategorie` VARCHAR(255) NOT NULL
+
+);
+ CREATE TABLE IF NOT EXISTS `all-in1`.`social` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nameCategorie` VARCHAR(255) NOT NULL
+
 );
