@@ -14,7 +14,7 @@ module.exports = {
       adress,
       image_url,
       phone,
-      description
+      description,
     } = req.body;
     if (
       !first_name ||
@@ -22,7 +22,8 @@ module.exports = {
       !Donation_name ||
       !type ||
       !adress ||
-      !phone
+      !phone ||
+      !description
     ) {
       res.send("please fill all required fields");
     } else {

@@ -11,6 +11,8 @@ const reviews = require("./routes/reviews");
 const helpgiverRoutes = require ('./routes/helpgiver')
 const payment = require('./routes/stripe')
 const ResetPassword = require('./routes/ResetPassword')
+ const eventRoutes = require('./routes/events')
+ const categoryRoutes = require('./routes/categorie')
 
 // const payment = require("./routes/stripe");
 //Create an Express App and define the port
@@ -36,7 +38,8 @@ app.use('/api/helpgiver',helpgiverRoutes)
 app.use('/api/payment',payment)
 app.use('/api/contact',contact)
 app.use('/api/',ResetPassword )
-// app.use('/api/',helpgiverRoutes)
+ app.use('/api/',eventRoutes)
+app.use('/api/',categoryRoutes)
 
 //Listening on port 3000 for connections
 
